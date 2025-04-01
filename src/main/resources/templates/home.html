@@ -1,21 +1,14 @@
 <html>
     <head>
         <title>Home Page</title>
+        <link rel="stylesheet" type="text/css" href="css/styles.css">
+        <script src="js/home.js"></script>
     </head>
 
     <body>
-        <script lang="javascript">
-            function changeTextButton() {
-                var changeBtn = document.getElementById("changeButton");
-                if (changeBtn.value == "Click Me!") {
-                    changeBtn.value = "You clicked me";
-                } else {
-                    changeBtn.value = "Click Me!";
-                }
-            }
-        </script>
 
         <h1>Home Page</h1>
-        <input type="button" id="changeButton" value="Click Me!" onClick="changeTextButton()">
+        <input type="button" class="red" id="changeButton" 
+                value="Click Me!" onClick="changeTextButton()">
     </body>
 </html>
