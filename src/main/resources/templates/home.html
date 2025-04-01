@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>Home Page</title>
+    </head>
+
+    <body>
+        <script lang="javascript">
+            function changeTextButton() {
+                var changeBtn = document.getElementById("changeButton");
+                if (changeBtn.value == "Click Me!") {
+                    changeBtn.value = "You clicked me";
+                } else {
+                    changeBtn.value = "Click Me!";
+                }
+            }
+        </script>
+
+        <h1>Home Page</h1>
+        <input type="button" id="changeButton" value="Click Me!" onClick="changeTextButton()">
+    </body>
+</html>
