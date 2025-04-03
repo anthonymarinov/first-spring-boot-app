@@ -1,14 +1,14 @@
+import InputForm from "@/components/InputForm";
+
 export default async function Home() {
+
+    const apiURL = "http://localhost:8090/api";
+    const todosAPI = "/todos";
+    
     interface Todo {
         id: string;
         name: string;
     }
-
-    const apiURL = "http://localhost:8090/api";
-    const todosAPI = "/todos";
-
-    // const submitButton = document.querySelector("button") as HTMLButtonElement;
-    // const formInput = document.querySelector("input") as HTMLInputElement; 
 
     async function getTodos(): Promise<string | string[] | undefined> {
         try {
@@ -29,31 +29,7 @@ export default async function Home() {
         }
     }
 
-    async function uploadName(data: Todo) {
-        try {
-            const response = await fetch(apiURL + todosAPI, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-                body: JSON.stringify(data)
-            });
-            
-            const result = await response.json();
-            console.log("success: ", result.message);
-        } catch (error) {
-            console.error(error);
-        }
-    }
-
-    /*
-    async function addName() {
-        if (!formInput) return;
-        const data = { name: formInput.value };
-        await uploadName(data);
-        formInput.value = "";
-    }
-    */
+    // TODO: make input form a next component with "use client"
 
     const todos = getTodos();;
 
@@ -61,19 +37,8 @@ export default async function Home() {
     <div className="container mx-auto">
         <h1>Things To Do</h1>
         <p>{todos}</p>
-
         <br/>
-
-        <form className="flex flex-row space-x-5">
-            <input type="text"
-                    className="bg-white text-black"
-                    placeholder="name">
-            </input>
-            <button type="submit"
-                    className="bg-blue-300 p-2">
-                Add Name
-            </button>
-        </form>
+        <InputForm />
     </div>
   );
 }

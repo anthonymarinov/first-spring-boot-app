@@ -21,6 +21,8 @@ public class DemoDao {
             "SELECT name FROM testtable";
     private static final String GET_ALL_IDS = 
             "SELECT idTestTable FROM testtable";
+    private static final String ADD_NAME = 
+            "INSERT INTO testtable (name) VALUES (:name)";
 
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
@@ -52,5 +54,16 @@ public class DemoDao {
             todos.add(newTodo);
         }
         return todos;
+    }
+
+    public String insertTodo(String name) {
+        try {
+            MapSqlParameterSource params = new MapSqlParameterSource();
+            params.addValue("name", name);
+            jdbcTemplate.update(ADD_NAME, params);
+            return "Successfully added";
+        } catch (Exception e) {
+            return e.getMessage();
+        }
     }
 }
