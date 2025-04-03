@@ -9,16 +9,25 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import testapp.daos.DemoDao;
 
+import java.util.List;
+
 @Controller
+@RequestMapping("/api")
 public class DemoController {
 
     @Autowired
     private DemoDao demoDao;
     
-    @RequestMapping(value="/index.html", method=RequestMethod.GET)
+    @RequestMapping(value="/index", method=RequestMethod.GET)
     @ResponseBody
     public String index() {
         return "First spring boot return!";
+    }
+
+    @RequestMapping(value="/data", method=RequestMethod.GET)
+    @ResponseBody
+    public List<String> data() {
+        return demoDao.getAllNames();
     }
 
     @RequestMapping(value="/home.html", method=RequestMethod.GET)

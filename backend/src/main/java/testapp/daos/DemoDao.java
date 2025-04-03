@@ -16,6 +16,8 @@ public class DemoDao {
     
     private static final String GET_FIRST_NAME = 
             "SELECT name FROM testtable WHERE idTestTable = 1";
+    private static final String GET_ALL_NAMES = 
+            "SELECT name FROM testtable";
 
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;
@@ -26,5 +28,14 @@ public class DemoDao {
                 new MapSqlParameterSource(), 
                 String.class);
         return namesFound.get(0);
+    }
+
+    public List<String> getAllNames() {
+        List<String> namesFound = jdbcTemplate.queryForList(
+                GET_ALL_NAMES,
+                new MapSqlParameterSource(),
+                String.class
+        );
+        return namesFound;
     }
 }
