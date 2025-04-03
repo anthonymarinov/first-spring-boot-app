@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import testapp.daos.DemoDao;
+import testapp.daos.Todo;
 
 import java.util.List;
 
@@ -24,10 +25,10 @@ public class DemoController {
         return "First spring boot return!";
     }
 
-    @RequestMapping(value="/data", method=RequestMethod.GET)
+    @RequestMapping(value="/todos", method=RequestMethod.GET)
     @ResponseBody
-    public List<String> data() {
-        return demoDao.getAllNames();
+    public List<Todo> todos() {
+        return demoDao.getAllTodos();
     }
 
     @RequestMapping(value="/home.html", method=RequestMethod.GET)
