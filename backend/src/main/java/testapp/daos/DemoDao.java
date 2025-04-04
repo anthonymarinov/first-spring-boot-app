@@ -4,6 +4,7 @@ import org.springframework.context.annotation.Scope;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -16,11 +17,11 @@ import org.springframework.beans.factory.config.BeanDefinition;
 public class DemoDao {
     
     private static final String GET_FIRST_NAME = 
-            "SELECT name FROM testtable WHERE idTestTable = 1";
+            "SELECT name FROM testtable WHERE id = 1";
     private static final String GET_ALL_NAMES = 
             "SELECT name FROM testtable";
     private static final String GET_ALL_IDS = 
-            "SELECT idTestTable FROM testtable";
+            "SELECT id FROM testtable";
     private static final String ADD_NAME = 
             "INSERT INTO testtable (name) VALUES (:name)";
 
@@ -56,12 +57,13 @@ public class DemoDao {
         return todos;
     }
 
-    public String insertTodo(String name) {
+    public String insertTodo(@RequestParam String name) {
         try {
             MapSqlParameterSource params = new MapSqlParameterSource();
             params.addValue("name", name);
             jdbcTemplate.update(ADD_NAME, params);
-            return "Successfully added";
+            String message = "Todo: (" + name + ") successfully added.";
+            return message;
         } catch (Exception e) {
             return e.getMessage();
         }
